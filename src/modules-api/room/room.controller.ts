@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Query,
@@ -21,7 +20,7 @@ export class RoomController {
 
   @Post()
   @ResponseMessage('Tạo phòng thành công')
-  create(@Body() createRoomDto: CreateRoomDto) {
+  createRoom(@Body() createRoomDto: CreateRoomDto) {
     return this.roomService.createRoom(createRoomDto);
   }
 

@@ -21,7 +21,7 @@ export const buildQuery = (query) => {
   const pageSizeDefault = 3;
 
   page = Math.max(1, Number(page) || pageDefault);
-  pageSize = Math.max(3, Number(pageSize) || pageSizeDefault);
+  pageSize = Math.max(1, Number(pageSize) || pageSizeDefault);
 
   const index = (page - 1) * pageSize;
 

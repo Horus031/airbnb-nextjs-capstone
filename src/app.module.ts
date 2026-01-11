@@ -8,6 +8,7 @@ import { PrismaModule } from './modules-system/prisma/prisma.module';
 import { TokenModule } from './modules-system/token/token.module';
 import { RoomModule } from './modules-api/room/room.module';
 import { CheckPermissionStrategy } from './common/guard/check-permission/check-permission.strategy';
+import { LocationModule } from './modules-api/location/location.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { CheckPermissionStrategy } from './common/guard/check-permission/check-p
     PrismaModule,
     TokenModule,
     RoomModule,
+    LocationModule,
   ],
   controllers: [AppController],
   providers: [AppService, ProtectStrategy, CheckPermissionStrategy],

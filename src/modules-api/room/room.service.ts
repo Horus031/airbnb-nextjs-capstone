@@ -96,16 +96,12 @@ export class RoomService {
       take: pageSize,
     });
 
-    console.log(roomPromise);
-
     const totalItemsPromise = await this.prisma.phong.count();
 
     const [rooms, totalItems] = await Promise.all([
       roomPromise,
       totalItemsPromise,
     ]);
-
-    console.log('rooms', rooms);
 
     const totalPages = Math.ceil(totalItems / pageSize);
 
