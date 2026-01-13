@@ -1,9 +1,11 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/modules-system/prisma/prisma.service';
 import { LoginDto } from './dto/login.dto';
-import { RegisterDto } from './dto/register.dto';
+import { UserDto } from '../../common/dto/user.dto';
 import * as bcrypt from 'bcrypt';
 import { TokenService } from 'src/modules-system/token/token.service';
 
@@ -14,7 +16,7 @@ export class AuthService {
     private readonly token: TokenService,
   ) {}
 
-  async register(registerDto: RegisterDto) {
+  async register(registerDto: UserDto) {
     const { name, email, password, phone, birthday, gender, role } =
       registerDto;
 
@@ -38,13 +40,13 @@ export class AuthService {
         phone: phone,
         birthday: birthday,
         genderId: gender,
-        roleId: role,
+        ...(role !== null && role !== 0 ? { roleId: role } : {}),
       },
     });
 
     console.log({ email, password, name, userExists });
 
-    return `Đăng ký thành công, hãy đăng nhập`;
+    return true;
   }
 
   async login(loginDto: LoginDto) {

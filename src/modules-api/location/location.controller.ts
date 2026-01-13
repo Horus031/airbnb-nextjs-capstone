@@ -31,6 +31,7 @@ export class LocationController {
   }
 
   @Get('phan-trang-tim-kiem')
+  @ResponseMessage('Lấy vị trí (phân trang) thành công')
   findAllPagination(@Query() query: QueryDto) {
     return this.locationService.findAllPagination(query);
   }

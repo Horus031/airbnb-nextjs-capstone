@@ -1,34 +1,62 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Query,
+  Put,
+} from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { UserDto } from 'src/common/dto/user.dto';
+import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
+import { QueryDto } from '../room/dto/query.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
-@Controller('user')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+  @ResponseMessage('Tạo người dùng thành công')
+  createUser(@Body() createUserDto: UserDto) {
+    return this.userService.createUser(createUserDto);
   }
 
   @Get()
+  @ResponseMessage('Lấy tất cả người dùng thành công')
   findAll() {
     return this.userService.findAll();
   }
 
+  @Get('phan-trang-tim-kiem')
+  @ResponseMessage('Lấy người dùng (phân trang) thành công')
+  findAllPagination(@Query() query: QueryDto) {
+    return this.userService.findAllPagination(query);
+  }
+
   @Get(':id')
+  @ResponseMessage('Lấy người dùng thành công')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+  @Get('search/:tenNguoiDung')
+  @ResponseMessage('Tìm người dùng thành công')
+  searchUser(@Param('tenNguoiDung') tenNguoiDung: string) {
+    return this.userService.searchUser(tenNguoiDung);
+  }
+
+  @Put(':id')
+  @ResponseMessage('Thay đổi thông tin người dùng thành công')
+  updateUser(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return this.userService.updateUser(+id, updateUserDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  @ResponseMessage('Xóa người dùng thành công')
+  removeUser(@Param('id') id: string) {
+    return this.userService.removeUser(+id);
   }
 }

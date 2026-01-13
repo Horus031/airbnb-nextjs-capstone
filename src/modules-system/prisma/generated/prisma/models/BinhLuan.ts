@@ -357,7 +357,7 @@ export type BinhLuanScalarWhereWithAggregatesInput = {
 }
 
 export type BinhLuanCreateInput = {
-  ngay_binh_luan: Date | string
+  ngay_binh_luan?: Date | string
   noi_dung: string
   sao_binh_luan?: number | null
   deletedBy?: number
@@ -373,7 +373,7 @@ export type BinhLuanUncheckedCreateInput = {
   id?: number
   ma_phong: number
   ma_nguoi_binh_luan: number
-  ngay_binh_luan: Date | string
+  ngay_binh_luan?: Date | string
   noi_dung: string
   sao_binh_luan?: number | null
   deletedBy?: number
@@ -414,7 +414,7 @@ export type BinhLuanCreateManyInput = {
   id?: number
   ma_phong: number
   ma_nguoi_binh_luan: number
-  ngay_binh_luan: Date | string
+  ngay_binh_luan?: Date | string
   noi_dung: string
   sao_binh_luan?: number | null
   deletedBy?: number
@@ -640,7 +640,7 @@ export type BinhLuanUncheckedUpdateManyWithoutPhongNestedInput = {
 }
 
 export type BinhLuanCreateWithoutNguoiDungInput = {
-  ngay_binh_luan: Date | string
+  ngay_binh_luan?: Date | string
   noi_dung: string
   sao_binh_luan?: number | null
   deletedBy?: number
@@ -654,7 +654,7 @@ export type BinhLuanCreateWithoutNguoiDungInput = {
 export type BinhLuanUncheckedCreateWithoutNguoiDungInput = {
   id?: number
   ma_phong: number
-  ngay_binh_luan: Date | string
+  ngay_binh_luan?: Date | string
   noi_dung: string
   sao_binh_luan?: number | null
   deletedBy?: number
@@ -708,7 +708,7 @@ export type BinhLuanScalarWhereInput = {
 }
 
 export type BinhLuanCreateWithoutPhongInput = {
-  ngay_binh_luan: Date | string
+  ngay_binh_luan?: Date | string
   noi_dung: string
   sao_binh_luan?: number | null
   deletedBy?: number
@@ -722,7 +722,7 @@ export type BinhLuanCreateWithoutPhongInput = {
 export type BinhLuanUncheckedCreateWithoutPhongInput = {
   id?: number
   ma_nguoi_binh_luan: number
-  ngay_binh_luan: Date | string
+  ngay_binh_luan?: Date | string
   noi_dung: string
   sao_binh_luan?: number | null
   deletedBy?: number
@@ -761,7 +761,7 @@ export type BinhLuanUpdateManyWithWhereWithoutPhongInput = {
 export type BinhLuanCreateManyNguoiDungInput = {
   id?: number
   ma_phong: number
-  ngay_binh_luan: Date | string
+  ngay_binh_luan?: Date | string
   noi_dung: string
   sao_binh_luan?: number | null
   deletedBy?: number
@@ -812,7 +812,7 @@ export type BinhLuanUncheckedUpdateManyWithoutNguoiDungInput = {
 export type BinhLuanCreateManyPhongInput = {
   id?: number
   ma_nguoi_binh_luan: number
-  ngay_binh_luan: Date | string
+  ngay_binh_luan?: Date | string
   noi_dung: string
   sao_binh_luan?: number | null
   deletedBy?: number

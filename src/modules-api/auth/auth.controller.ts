@@ -3,9 +3,10 @@
 import { Controller, Get, Post, Body, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
-import { RegisterDto } from './dto/register.dto';
 import { Public } from 'src/common/decorators/public.decorator';
 import type { Request } from 'express';
+import { UserDto } from 'src/common/dto/user.dto';
+import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -13,7 +14,8 @@ export class AuthController {
 
   @Public()
   @Post('signup')
-  register(@Body() registerDto: RegisterDto) {
+  @ResponseMessage('Đăng ký thành công, hãy đăng nhập')
+  register(@Body() registerDto: UserDto) {
     const result = this.authService.register(registerDto);
 
     return result;
@@ -21,6 +23,7 @@ export class AuthController {
 
   @Public()
   @Post('signin')
+  @ResponseMessage('Đăng nhập thành công')
   login(@Body() loginDto: LoginDto) {
     const result = this.authService.login(loginDto);
     return result;
