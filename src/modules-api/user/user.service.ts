@@ -1,18 +1,16 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/prefer-promise-reject-errors */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/await-thenable */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { PrismaService } from 'src/modules-system/prisma/prisma.service';
 import { QueryDto } from '../room/dto/query.dto';
-import { buildQuery } from 'src/common/helper/build-query.helper';
-import { UserDto } from 'src/common/dto/user.dto';
 import * as bcrypt from 'bcrypt';
-import cloudinary from 'src/common/cloudinary/init.cloudinary';
 import { UploadApiResponse } from 'cloudinary';
 import { Request } from 'express';
+import { PrismaService } from 'src/modules-system/prisma/prisma.service';
+import { UserDto } from 'src/common/dto/user.dto';
+import cloudinary from 'src/common/cloudinary/init.cloudinary';
+import { buildQuery } from 'src/common/helper/build-query.helper';
 
 @Injectable()
 export class UserService {
