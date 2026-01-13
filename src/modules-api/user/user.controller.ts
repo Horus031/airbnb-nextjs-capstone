@@ -7,13 +7,22 @@ import {
   Delete,
   Query,
   Put,
+  UseInterceptors,
+  UploadedFile,
+  Req,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from 'src/common/dto/user.dto';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 import { QueryDto } from '../room/dto/query.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import type { Request } from 'express';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { FileUploadDto } from 'src/common/dto/file.dto';
 
+@ApiTags('NguoiDung')
+@ApiBearerAuth()
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -22,6 +31,18 @@ export class UserController {
   @ResponseMessage('Tạo người dùng thành công')
   createUser(@Body() createUserDto: UserDto) {
     return this.userService.createUser(createUserDto);
+  }
+
+  @Post('upload-avatar')
+  @ResponseMessage('Cập nhật avatar thành công')
+  @UseInterceptors(FileInterceptor('file'))
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'Avatar',
+    type: FileUploadDto,
+  })
+  uploadAvatar(@Req() req: Request, @UploadedFile() file: Express.Multer.File) {
+    return this.userService.uploadAvatar(req, file);
   }
 
   @Get()

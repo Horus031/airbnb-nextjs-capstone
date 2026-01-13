@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `NguoiDung` (
 	`name` VARCHAR(255) NOT NULL,
 	`email` VARCHAR(255) UNIQUE NOT NULL,
 	`password` VARCHAR(255),
+	`avatar` VARCHAR(255),
 	`phone` VARCHAR(255),
 	`birthday` VARCHAR(255),
 	`genderId` INT NOT NULL,

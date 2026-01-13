@@ -1,0 +1,36 @@
+services:
+  mysql:
+    image: mariadb:10.6
+    container_name: mysql_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: airbnb_capstone
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_local_volume:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p1234 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend_app
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "3012:3012"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    command: sh -c "npx prisma db push && npm run seed:prod && node dist/src/main"
+
+volumes:
+  mysql_local_volume:

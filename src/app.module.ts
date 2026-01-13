@@ -10,6 +10,7 @@ import { RoomModule } from './modules-api/room/room.module';
 import { CheckPermissionStrategy } from './common/guard/check-permission/check-permission.strategy';
 import { LocationModule } from './modules-api/location/location.module';
 import { UserModule } from './modules-api/user/user.module';
+import { CommentModule } from './modules-api/comment/comment.module';
 import { BookingModule } from './modules-api/booking/booking.module';
 
 @Module({
@@ -21,6 +22,7 @@ import { BookingModule } from './modules-api/booking/booking.module';
     RoomModule,
     LocationModule,
     UserModule,
+    CommentModule,
     BookingModule,
   ],
   controllers: [AppController],

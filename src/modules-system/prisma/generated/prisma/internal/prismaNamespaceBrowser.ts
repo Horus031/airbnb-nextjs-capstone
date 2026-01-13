@@ -131,6 +131,7 @@ export const NguoiDungScalarFieldEnum = {
   name: 'name',
   email: 'email',
   password: 'password',
+  avatar: 'avatar',
   phone: 'phone',
   birthday: 'birthday',
   genderId: 'genderId',
@@ -271,6 +272,7 @@ export const NguoiDungOrderByRelevanceFieldEnum = {
   name: 'name',
   email: 'email',
   password: 'password',
+  avatar: 'avatar',
   phone: 'phone',
   birthday: 'birthday'
 } as const

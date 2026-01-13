@@ -7,6 +7,7 @@ import { Public } from 'src/common/decorators/public.decorator';
 import type { Request } from 'express';
 import { UserDto } from 'src/common/dto/user.dto';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('auth')
 export class AuthController {
@@ -29,6 +30,7 @@ export class AuthController {
     return result;
   }
 
+  @ApiBearerAuth()
   @Get('get-info')
   getInfo(@Req() req: Request) {
     const result = this.authService.getInfo(req);

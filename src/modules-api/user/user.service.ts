@@ -1,4 +1,6 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/prefer-promise-reject-errors */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/await-thenable */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { BadRequestException, Injectable } from '@nestjs/common';
@@ -8,6 +10,9 @@ import { QueryDto } from '../room/dto/query.dto';
 import { buildQuery } from 'src/common/helper/build-query.helper';
 import { UserDto } from 'src/common/dto/user.dto';
 import * as bcrypt from 'bcrypt';
+import cloudinary from 'src/common/cloudinary/init.cloudinary';
+import { UploadApiResponse } from 'cloudinary';
+import { Request } from 'express';
 
 @Injectable()
 export class UserService {
@@ -43,6 +48,48 @@ export class UserService {
     console.log({ email, password, name, userExists });
 
     return true;
+  }
+
+  async uploadAvatar(req: Request, file: Express.Multer.File) {
+    const userExists = await this.prisma.nguoiDung.findUnique({
+      where: {
+        id: (req.user as UserDto).id,
+      },
+    });
+
+    if (!userExists) {
+      throw new BadRequestException(
+        'Người dùng không tồn tại, vui lòng thử lại',
+      );
+    }
+
+    if (userExists.avatar) {
+      await cloudinary.uploader.destroy(userExists.avatar);
+    }
+
+    const uploadResult = await new Promise<UploadApiResponse>(
+      (resolve, reject) => {
+        cloudinary.uploader
+          .upload_stream((error, uploadResult) => {
+            if (error) {
+              return reject(error);
+            }
+            return resolve(uploadResult as UploadApiResponse);
+          })
+          .end(file.buffer);
+      },
+    );
+
+    await this.prisma.nguoiDung.update({
+      where: {
+        id: (req.user as UserDto).id,
+      },
+      data: {
+        avatar: uploadResult.public_id,
+      },
+    });
+
+    return uploadResult.url;
   }
 
   async findAll() {

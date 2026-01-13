@@ -11,41 +11,50 @@ import { BookingService } from './booking.service';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { UpdateBookingDto } from './dto/update-booking.dto';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-@Controller('binh-luan')
+@ApiTags('DatPhong')
+@ApiBearerAuth()
+@Controller('dat-phong')
 export class BookingController {
   constructor(private readonly bookingService: BookingService) {}
 
   @Post()
-  @ResponseMessage('Tạo bình luận thành công')
-  create(@Body() createBookingDto: CreateBookingDto) {
-    return this.bookingService.createComments(createBookingDto);
+  @ResponseMessage('Đặt phòng thành công')
+  createBooking(@Body() createBookingDto: CreateBookingDto) {
+    return this.bookingService.createBooking(createBookingDto);
   }
 
   @Get()
-  @ResponseMessage('Lấy tất cả bình luận thành công')
+  @ResponseMessage('Lấy tất cả lịch đặt phòng thành công')
   findAll() {
     return this.bookingService.findAll();
   }
 
-  @Get('lay-binh-luan-theo-phong/:maPhong')
-  @ResponseMessage('Lấy bình luận theo phòng thành công')
-  findOne(@Param('maPhong') maPhong: string) {
-    return this.bookingService.findByRoom(+maPhong);
+  @Get(':id')
+  @ResponseMessage('Lấy lịch đặt phòng theo ID thành công')
+  findOne(@Param('id') id: string) {
+    return this.bookingService.findOne(+id);
+  }
+
+  @Get('lay-theo-nguoi-dung/:maNguoiDung')
+  @ResponseMessage('Lấy lịch đặt phòng của người dùng thành công')
+  findOneByUserId(@Param('maNguoiDung') maNguoidung: string) {
+    return this.bookingService.findOneByUserId(+maNguoidung);
   }
 
   @Put(':id')
-  @ResponseMessage('Cập nhật bình luận thành công')
-  updateComment(
+  @ResponseMessage('Cập nhật lịch đặt phòng thành công')
+  updateBooking(
     @Param('id') id: string,
     @Body() updateBookingDto: UpdateBookingDto,
   ) {
-    return this.bookingService.updateComment(+id, updateBookingDto);
+    return this.bookingService.updateBooking(+id, updateBookingDto);
   }
 
   @Delete(':id')
-  @ResponseMessage('Xóa bình luận thành công')
-  removeComment(@Param('id') id: string) {
-    return this.bookingService.removeComment(+id);
+  @ResponseMessage('Xóa lịch đặt phòng thành công')
+  removeBooking(@Param('id') id: string) {
+    return this.bookingService.removeBooking(+id);
   }
 }

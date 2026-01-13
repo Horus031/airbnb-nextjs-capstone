@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/prefer-promise-reject-errors */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/await-thenable */
 import { BadRequestException, Injectable } from '@nestjs/common';
@@ -6,6 +8,8 @@ import { UpdateRoomDto } from './dto/update-room.dto';
 import { PrismaService } from 'src/modules-system/prisma/prisma.service';
 import { QueryDto } from './dto/query.dto';
 import { buildQuery } from 'src/common/helper/build-query.helper';
+import { UploadApiResponse } from 'cloudinary';
+import cloudinary from 'src/common/cloudinary/init.cloudinary';
 
 @Injectable()
 export class RoomService {
@@ -67,6 +71,46 @@ export class RoomService {
     });
 
     return newRoom;
+  }
+
+  async uploadRoomImage(maPhong: number, file: Express.Multer.File) {
+    const roomExists = await this.prisma.phong.findUnique({
+      where: {
+        id: maPhong,
+      },
+    });
+
+    if (!roomExists) {
+      throw new BadRequestException('Phòng không tồn tại, vui lòng thử lại');
+    }
+
+    if (roomExists.hinh_anh) {
+      await cloudinary.uploader.destroy(roomExists.hinh_anh);
+    }
+
+    const uploadResult = await new Promise<UploadApiResponse>(
+      (resolve, reject) => {
+        cloudinary.uploader
+          .upload_stream((error, uploadResult) => {
+            if (error) {
+              return reject(error);
+            }
+            return resolve(uploadResult as UploadApiResponse);
+          })
+          .end(file.buffer);
+      },
+    );
+
+    await this.prisma.phong.update({
+      where: {
+        id: maPhong,
+      },
+      data: {
+        hinh_anh: uploadResult.public_id,
+      },
+    });
+
+    return uploadResult.url;
   }
 
   async findAll() {

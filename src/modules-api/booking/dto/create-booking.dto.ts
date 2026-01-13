@@ -1,28 +1,29 @@
-import {
-  IsISO8601,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsDateString, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreateBookingDto {
   @IsNotEmpty()
   @IsNumber()
+  @ApiProperty()
   maPhong: number;
 
   @IsNotEmpty()
-  @IsNumber()
-  maNguoiBinhLuan: number;
-
-  @IsISO8601()
-  @IsOptional()
-  ngayBinhLuan: string;
+  @IsDateString()
+  @ApiProperty()
+  ngayDen: string;
 
   @IsNotEmpty()
-  @IsString()
-  noiDung: string;
+  @IsDateString()
+  @ApiProperty()
+  ngayDi: string;
 
+  @IsNotEmpty()
   @IsNumber()
-  saoBinhLuan: number;
+  @ApiProperty()
+  soLuongKhach: number;
+
+  @IsNotEmpty()
+  @IsNumber()
+  @ApiProperty()
+  maNguoiDung: number;
 }

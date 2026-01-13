@@ -45,6 +45,7 @@ export type NguoiDungMinAggregateOutputType = {
   name: string | null
   email: string | null
   password: string | null
+  avatar: string | null
   phone: string | null
   birthday: string | null
   genderId: number | null
@@ -61,6 +62,7 @@ export type NguoiDungMaxAggregateOutputType = {
   name: string | null
   email: string | null
   password: string | null
+  avatar: string | null
   phone: string | null
   birthday: string | null
   genderId: number | null
@@ -77,6 +79,7 @@ export type NguoiDungCountAggregateOutputType = {
   name: number
   email: number
   password: number
+  avatar: number
   phone: number
   birthday: number
   genderId: number
@@ -109,6 +112,7 @@ export type NguoiDungMinAggregateInputType = {
   name?: true
   email?: true
   password?: true
+  avatar?: true
   phone?: true
   birthday?: true
   genderId?: true
@@ -125,6 +129,7 @@ export type NguoiDungMaxAggregateInputType = {
   name?: true
   email?: true
   password?: true
+  avatar?: true
   phone?: true
   birthday?: true
   genderId?: true
@@ -141,6 +146,7 @@ export type NguoiDungCountAggregateInputType = {
   name?: true
   email?: true
   password?: true
+  avatar?: true
   phone?: true
   birthday?: true
   genderId?: true
@@ -244,6 +250,7 @@ export type NguoiDungGroupByOutputType = {
   name: string
   email: string
   password: string | null
+  avatar: string | null
   phone: string | null
   birthday: string | null
   genderId: number
@@ -283,6 +290,7 @@ export type NguoiDungWhereInput = {
   name?: Prisma.StringFilter<"NguoiDung"> | string
   email?: Prisma.StringFilter<"NguoiDung"> | string
   password?: Prisma.StringNullableFilter<"NguoiDung"> | string | null
+  avatar?: Prisma.StringNullableFilter<"NguoiDung"> | string | null
   phone?: Prisma.StringNullableFilter<"NguoiDung"> | string | null
   birthday?: Prisma.StringNullableFilter<"NguoiDung"> | string | null
   genderId?: Prisma.IntFilter<"NguoiDung"> | number
@@ -303,6 +311,7 @@ export type NguoiDungOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
+  avatar?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   birthday?: Prisma.SortOrderInput | Prisma.SortOrder
   genderId?: Prisma.SortOrder
@@ -327,6 +336,7 @@ export type NguoiDungWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.NguoiDungWhereInput | Prisma.NguoiDungWhereInput[]
   name?: Prisma.StringFilter<"NguoiDung"> | string
   password?: Prisma.StringNullableFilter<"NguoiDung"> | string | null
+  avatar?: Prisma.StringNullableFilter<"NguoiDung"> | string | null
   phone?: Prisma.StringNullableFilter<"NguoiDung"> | string | null
   birthday?: Prisma.StringNullableFilter<"NguoiDung"> | string | null
   genderId?: Prisma.IntFilter<"NguoiDung"> | number
@@ -347,6 +357,7 @@ export type NguoiDungOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
+  avatar?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   birthday?: Prisma.SortOrderInput | Prisma.SortOrder
   genderId?: Prisma.SortOrder
@@ -371,6 +382,7 @@ export type NguoiDungScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"NguoiDung"> | string
   email?: Prisma.StringWithAggregatesFilter<"NguoiDung"> | string
   password?: Prisma.StringNullableWithAggregatesFilter<"NguoiDung"> | string | null
+  avatar?: Prisma.StringNullableWithAggregatesFilter<"NguoiDung"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"NguoiDung"> | string | null
   birthday?: Prisma.StringNullableWithAggregatesFilter<"NguoiDung"> | string | null
   genderId?: Prisma.IntWithAggregatesFilter<"NguoiDung"> | number
@@ -386,6 +398,7 @@ export type NguoiDungCreateInput = {
   name: string
   email: string
   password?: string | null
+  avatar?: string | null
   phone?: string | null
   birthday?: string | null
   deletedBy?: number
@@ -404,6 +417,7 @@ export type NguoiDungUncheckedCreateInput = {
   name: string
   email: string
   password?: string | null
+  avatar?: string | null
   phone?: string | null
   birthday?: string | null
   genderId: number
@@ -421,6 +435,7 @@ export type NguoiDungUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedBy?: Prisma.IntFieldUpdateOperationsInput | number
@@ -439,6 +454,7 @@ export type NguoiDungUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genderId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -457,6 +473,7 @@ export type NguoiDungCreateManyInput = {
   name: string
   email: string
   password?: string | null
+  avatar?: string | null
   phone?: string | null
   birthday?: string | null
   genderId: number
@@ -472,6 +489,7 @@ export type NguoiDungUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedBy?: Prisma.IntFieldUpdateOperationsInput | number
@@ -486,6 +504,7 @@ export type NguoiDungUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genderId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -523,6 +542,7 @@ export type NguoiDungCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  avatar?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   birthday?: Prisma.SortOrder
   genderId?: Prisma.SortOrder
@@ -546,6 +566,7 @@ export type NguoiDungMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  avatar?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   birthday?: Prisma.SortOrder
   genderId?: Prisma.SortOrder
@@ -562,6 +583,7 @@ export type NguoiDungMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  avatar?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   birthday?: Prisma.SortOrder
   genderId?: Prisma.SortOrder
@@ -696,6 +718,7 @@ export type NguoiDungCreateWithoutBinhLuanInput = {
   name: string
   email: string
   password?: string | null
+  avatar?: string | null
   phone?: string | null
   birthday?: string | null
   deletedBy?: number
@@ -713,6 +736,7 @@ export type NguoiDungUncheckedCreateWithoutBinhLuanInput = {
   name: string
   email: string
   password?: string | null
+  avatar?: string | null
   phone?: string | null
   birthday?: string | null
   genderId: number
@@ -745,6 +769,7 @@ export type NguoiDungUpdateWithoutBinhLuanInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedBy?: Prisma.IntFieldUpdateOperationsInput | number
@@ -762,6 +787,7 @@ export type NguoiDungUncheckedUpdateWithoutBinhLuanInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genderId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -778,6 +804,7 @@ export type NguoiDungCreateWithoutDatPhongInput = {
   name: string
   email: string
   password?: string | null
+  avatar?: string | null
   phone?: string | null
   birthday?: string | null
   deletedBy?: number
@@ -795,6 +822,7 @@ export type NguoiDungUncheckedCreateWithoutDatPhongInput = {
   name: string
   email: string
   password?: string | null
+  avatar?: string | null
   phone?: string | null
   birthday?: string | null
   genderId: number
@@ -827,6 +855,7 @@ export type NguoiDungUpdateWithoutDatPhongInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedBy?: Prisma.IntFieldUpdateOperationsInput | number
@@ -844,6 +873,7 @@ export type NguoiDungUncheckedUpdateWithoutDatPhongInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genderId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -860,6 +890,7 @@ export type NguoiDungCreateWithoutGendersInput = {
   name: string
   email: string
   password?: string | null
+  avatar?: string | null
   phone?: string | null
   birthday?: string | null
   deletedBy?: number
@@ -877,6 +908,7 @@ export type NguoiDungUncheckedCreateWithoutGendersInput = {
   name: string
   email: string
   password?: string | null
+  avatar?: string | null
   phone?: string | null
   birthday?: string | null
   roleId?: number
@@ -923,6 +955,7 @@ export type NguoiDungScalarWhereInput = {
   name?: Prisma.StringFilter<"NguoiDung"> | string
   email?: Prisma.StringFilter<"NguoiDung"> | string
   password?: Prisma.StringNullableFilter<"NguoiDung"> | string | null
+  avatar?: Prisma.StringNullableFilter<"NguoiDung"> | string | null
   phone?: Prisma.StringNullableFilter<"NguoiDung"> | string | null
   birthday?: Prisma.StringNullableFilter<"NguoiDung"> | string | null
   genderId?: Prisma.IntFilter<"NguoiDung"> | number
@@ -938,6 +971,7 @@ export type NguoiDungCreateWithoutRolesInput = {
   name: string
   email: string
   password?: string | null
+  avatar?: string | null
   phone?: string | null
   birthday?: string | null
   deletedBy?: number
@@ -955,6 +989,7 @@ export type NguoiDungUncheckedCreateWithoutRolesInput = {
   name: string
   email: string
   password?: string | null
+  avatar?: string | null
   phone?: string | null
   birthday?: string | null
   genderId: number
@@ -998,6 +1033,7 @@ export type NguoiDungCreateManyGendersInput = {
   name: string
   email: string
   password?: string | null
+  avatar?: string | null
   phone?: string | null
   birthday?: string | null
   roleId?: number
@@ -1012,6 +1048,7 @@ export type NguoiDungUpdateWithoutGendersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedBy?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1029,6 +1066,7 @@ export type NguoiDungUncheckedUpdateWithoutGendersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roleId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1046,6 +1084,7 @@ export type NguoiDungUncheckedUpdateManyWithoutGendersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roleId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1061,6 +1100,7 @@ export type NguoiDungCreateManyRolesInput = {
   name: string
   email: string
   password?: string | null
+  avatar?: string | null
   phone?: string | null
   birthday?: string | null
   genderId: number
@@ -1075,6 +1115,7 @@ export type NguoiDungUpdateWithoutRolesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedBy?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1092,6 +1133,7 @@ export type NguoiDungUncheckedUpdateWithoutRolesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genderId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1109,6 +1151,7 @@ export type NguoiDungUncheckedUpdateManyWithoutRolesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genderId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1164,6 +1207,7 @@ export type NguoiDungSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   name?: boolean
   email?: boolean
   password?: boolean
+  avatar?: boolean
   phone?: boolean
   birthday?: boolean
   genderId?: boolean
@@ -1187,6 +1231,7 @@ export type NguoiDungSelectScalar = {
   name?: boolean
   email?: boolean
   password?: boolean
+  avatar?: boolean
   phone?: boolean
   birthday?: boolean
   genderId?: boolean
@@ -1198,7 +1243,7 @@ export type NguoiDungSelectScalar = {
   updatedAt?: boolean
 }
 
-export type NguoiDungOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "phone" | "birthday" | "genderId" | "roleId" | "deletedBy" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["nguoiDung"]>
+export type NguoiDungOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "avatar" | "phone" | "birthday" | "genderId" | "roleId" | "deletedBy" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["nguoiDung"]>
 export type NguoiDungInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   BinhLuan?: boolean | Prisma.NguoiDung$BinhLuanArgs<ExtArgs>
   DatPhong?: boolean | Prisma.NguoiDung$DatPhongArgs<ExtArgs>
@@ -1220,6 +1265,7 @@ export type $NguoiDungPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     name: string
     email: string
     password: string | null
+    avatar: string | null
     phone: string | null
     birthday: string | null
     genderId: number
@@ -1606,6 +1652,7 @@ export interface NguoiDungFieldRefs {
   readonly name: Prisma.FieldRef<"NguoiDung", 'String'>
   readonly email: Prisma.FieldRef<"NguoiDung", 'String'>
   readonly password: Prisma.FieldRef<"NguoiDung", 'String'>
+  readonly avatar: Prisma.FieldRef<"NguoiDung", 'String'>
   readonly phone: Prisma.FieldRef<"NguoiDung", 'String'>
   readonly birthday: Prisma.FieldRef<"NguoiDung", 'String'>
   readonly genderId: Prisma.FieldRef<"NguoiDung", 'Int'>

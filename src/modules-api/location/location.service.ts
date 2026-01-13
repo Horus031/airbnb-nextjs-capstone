@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/prefer-promise-reject-errors */
 /* eslint-disable @typescript-eslint/await-thenable */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { BadRequestException, Injectable } from '@nestjs/common';
@@ -6,6 +8,8 @@ import { UpdateLocationDto } from './dto/update-location.dto';
 import { PrismaService } from 'src/modules-system/prisma/prisma.service';
 import { buildQuery } from 'src/common/helper/build-query.helper';
 import { QueryDto } from '../room/dto/query.dto';
+import { UploadApiResponse } from 'cloudinary';
+import cloudinary from 'src/common/cloudinary/init.cloudinary';
 
 @Injectable()
 export class LocationService {
@@ -23,6 +27,46 @@ export class LocationService {
     });
 
     return newLocation;
+  }
+
+  async uploadLocationImage(maViTri: number, file: Express.Multer.File) {
+    const locationExists = await this.prisma.viTri.findUnique({
+      where: {
+        id: maViTri,
+      },
+    });
+
+    if (!locationExists) {
+      throw new BadRequestException('Phòng không tồn tại, vui lòng thử lại');
+    }
+
+    if (locationExists.hinh_anh) {
+      await cloudinary.uploader.destroy(locationExists.hinh_anh);
+    }
+
+    const uploadResult = await new Promise<UploadApiResponse>(
+      (resolve, reject) => {
+        cloudinary.uploader
+          .upload_stream((error, uploadResult) => {
+            if (error) {
+              return reject(error);
+            }
+            return resolve(uploadResult as UploadApiResponse);
+          })
+          .end(file.buffer);
+      },
+    );
+
+    await this.prisma.viTri.update({
+      where: {
+        id: maViTri,
+      },
+      data: {
+        hinh_anh: uploadResult.public_id,
+      },
+    });
+
+    return uploadResult.url;
   }
 
   findAll() {
