@@ -24,6 +24,9 @@ export class PrismaService
       password: DATABASE_PASSWORD,
       connectionLimit: 5,
       allowPublicKeyRetrieval: true,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     });
     super({ adapter });
   }
