@@ -10,6 +10,13 @@ import { initSwagger } from './common/swagger/init.swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // Enable CORS
+  app.enableCors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
+
   const reflector = app.get(Reflector);
   app.useGlobalGuards(new ProtectGuard(reflector));
   app.useGlobalGuards(new CheckPermissionGuard(reflector));
@@ -29,10 +36,9 @@ async function bootstrap() {
 
   initSwagger(app);
 
-  app.enableCors();
-
-  await app.listen(PORT ?? 3000, () => {
-    console.log(`Server online at http://localhost:${PORT}`);
-  });
+  const port = PORT || 3012;
+  await app.listen(port, '0.0.0.0');
+  console.log(`🚀 Server running on port ${port}`);
+  console.log(`📖 Swagger docs: http://localhost:${port}/docs`);
 }
 void bootstrap();
