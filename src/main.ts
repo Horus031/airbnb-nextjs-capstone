@@ -27,9 +27,10 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
 
+  initSwagger(app);
+
   app.enableCors();
 
-  initSwagger(app);
   await app.listen(PORT ?? 3000, () => {
     console.log(`Server online at http://localhost:${PORT}`);
   });
