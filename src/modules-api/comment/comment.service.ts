@@ -6,6 +6,45 @@ import { UpdateCommentDto } from './dto/update-comment.dto';
 @Injectable()
 export class CommentService {
   constructor(private readonly prisma: PrismaService) {}
+
+  // Helper function to convert date input to valid Date object
+  private parseDate(
+    dateInput: string | number | Date | undefined | null,
+  ): Date | undefined {
+    if (!dateInput || dateInput === '') {
+      return undefined;
+    }
+
+    // If it's already a Date object
+    if (dateInput instanceof Date) {
+      return dateInput;
+    }
+
+    // If it's a number (timestamp)
+    if (typeof dateInput === 'number') {
+      return new Date(dateInput);
+    }
+
+    // If it's a string
+    if (typeof dateInput === 'string') {
+      // Remove commas if present (e.g., "1,768,377,900,466" -> "1768377900466")
+      const cleanedString = dateInput.replace(/,/g, '');
+
+      // Check if it's a numeric timestamp string
+      if (/^\d+$/.test(cleanedString)) {
+        return new Date(Number(cleanedString));
+      }
+
+      // Try parsing as ISO string
+      const parsed = new Date(dateInput);
+      if (!isNaN(parsed.getTime())) {
+        return parsed;
+      }
+    }
+
+    return undefined;
+  }
+
   async createComments(createCommentDto: CreateCommentDto) {
     const { maPhong, maNguoiBinhLuan, ngayBinhLuan, noiDung, saoBinhLuan } =
       createCommentDto;
@@ -22,13 +61,13 @@ export class CommentService {
       );
     }
 
+    const parsedDate = this.parseDate(ngayBinhLuan);
+
     const newComment = await this.prisma.binhLuan.create({
       data: {
         ma_phong: maPhong,
         ma_nguoi_binh_luan: maNguoiBinhLuan,
-        ...(ngayBinhLuan !== null && ngayBinhLuan !== ''
-          ? { ngay_binh_luan: ngayBinhLuan }
-          : {}),
+        ...(parsedDate ? { ngay_binh_luan: parsedDate } : {}),
         noi_dung: noiDung,
         sao_binh_luan: saoBinhLuan,
       },
@@ -81,17 +120,16 @@ export class CommentService {
     const { maPhong, maNguoiBinhLuan, ngayBinhLuan, noiDung, saoBinhLuan } =
       updateCommentDto;
 
+    const parsedDate = this.parseDate(ngayBinhLuan) || new Date();
+
     const updatedLocation = await this.prisma.binhLuan.update({
       where: {
         id: id,
       },
-
       data: {
         ma_phong: maPhong,
         ma_nguoi_binh_luan: maNguoiBinhLuan,
-        ...(ngayBinhLuan !== null && ngayBinhLuan !== ''
-          ? { ngay_binh_luan: ngayBinhLuan }
-          : { ngay_binh_luan: Date.now().toLocaleString() }),
+        ngay_binh_luan: parsedDate,
         noi_dung: noiDung,
         sao_binh_luan: saoBinhLuan,
       },

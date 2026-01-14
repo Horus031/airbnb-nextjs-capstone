@@ -1,34 +1,25 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsISO8601,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateCommentDto {
-  @IsNotEmpty()
+  @ApiProperty({ example: 1 })
   @IsNumber()
-  @ApiProperty()
   maPhong: number;
 
-  @IsNotEmpty()
+  @ApiProperty({ example: 1 })
   @IsNumber()
-  @ApiProperty()
   maNguoiBinhLuan: number;
 
-  @IsISO8601()
+  @ApiProperty({ example: '2026-01-14T00:00:00.000Z', required: false })
   @IsOptional()
-  @ApiProperty()
-  ngayBinhLuan: string;
+  ngayBinhLuan?: string | number | Date;
 
-  @IsNotEmpty()
+  @ApiProperty({ example: 'Great room!' })
   @IsString()
-  @ApiProperty()
   noiDung: string;
 
+  @ApiProperty({ example: 5 })
   @IsNumber()
-  @ApiProperty()
-  saoBinhLuan: number;
+  @IsOptional()
+  saoBinhLuan?: number;
 }

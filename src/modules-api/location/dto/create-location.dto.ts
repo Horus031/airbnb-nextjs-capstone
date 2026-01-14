@@ -1,21 +1,24 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateLocationDto {
   @IsNotEmpty()
   @IsString()
-  @ApiProperty({ example: 'Test' })
+  @ApiProperty({ example: 'Quận 1' })
   tenViTri: string;
 
   @IsNotEmpty()
   @IsString()
-  @ApiProperty()
+  @ApiProperty({ example: 'Hồ Chí Minh' })
   tinhThanh: string;
 
   @IsNotEmpty()
   @IsString()
-  @ApiProperty()
+  @ApiProperty({ example: 'Việt Nam' })
   quocGia: string;
-  @ApiProperty()
-  hinhAnh: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty({ example: 'https://example.com/image.jpg', required: false })
+  hinhAnh?: string;
 }
